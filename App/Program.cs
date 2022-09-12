@@ -4,24 +4,38 @@ using System;
 namespace Application {
   class MyArrays {
     public static void Main(string[] args) {
-      int[] a = { 1, 8, 2, 10, 6 };
-      int[] b = { 7, 9, 10, 12 };
-      Array.Sort(a);
-      Array.Sort(b);
-      Array.Reverse(b);
-      foreach (var item in a) {
-        Console.Write($"{item}, ");
+      int rows;
+      int columns; 
+      string input;
+      Console.WriteLine("Введите размерность матрицы:");
+
+      do {
+        Console.Write("Введите количество строк матрицы: ");
+        input = Console.ReadLine();
+        Console.WriteLine();
+      } while(!Int32.TryParse(input, out rows) || rows < 1);
+
+      do {
+        Console.Write("Введите количество столбцов матрицы: ");
+        input = Console.ReadLine();
+        Console.WriteLine();
+      } while(!Int32.TryParse(input, out columns) || columns < 1);
+
+      var rand = new Random();
+      int[,] matrix = new int[rows, columns]; 
+      for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < columns; j++) {
+          matrix[i, j] = rand.Next(10);
+        }
       }
-      Console.WriteLine();
-      foreach (var item in b) {
-        Console.Write($"{item}, ");
+
+      Console.WriteLine("Сформирована рандомная матрица:");
+      for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < columns; j++) {
+          Console.Write($"{matrix[i, j]} ");
+        }
+        Console.WriteLine();
       }
-      Console.WriteLine();
-      int[] c = a.Concat(b).ToArray();
-      foreach(var item in c) {
-        Console.Write($"{item}, ");
-      }
-      Console.WriteLine();
     }
   }
 }
