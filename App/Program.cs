@@ -1,88 +1,73 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
-
-namespace Application {
+﻿namespace Application {
   class MyArrays {
     public static void Main(string[] args) {
       int rows;
-      int columns; 
+      int columns;
       string input;
-      Console.WriteLine("Введите размерность матрицы:");
-
       do {
-        Console.Write("Введите количество строк матрицы: ");
+        Console.Write("Type the number of rows: ");
         input = Console.ReadLine();
         Console.WriteLine();
-      } while(!Int32.TryParse(input, out rows) || rows < 1);
+      } while (!Int32.TryParse(input, out rows) || rows < 1);
 
       do {
-        Console.Write("Введите количество столбцов матрицы: ");
+        Console.Write("Type the number of columns: ");
         input = Console.ReadLine();
         Console.WriteLine();
-      } while(!Int32.TryParse(input, out columns) || columns < 1);
+      } while (!Int32.TryParse(input, out columns) || columns < 1);
 
       var rand = new Random();
-      int[,] matrix = new int[rows, columns]; 
-      for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < columns; j++) {
-          matrix[i, j] = rand.Next(10);
-        }
-      }
-
-      Console.WriteLine("Сформирована рандомная матрица:");
-      for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < columns; j++) {
-          Console.Write($"{matrix[i, j]} ");
-        }
-        Console.WriteLine();
-      }
-
-      Console.WriteLine("Сортировка по строкам: ");
-      int[] row = new int[columns];
-      for (int i = 0; i < rows; i++) {
+      int[,] matrix = new int[rows, columns];
+      for (int i = 0; i < rows; i++)
         for (int j = 0; j < columns; j++)
-          row[j] = matrix[i, j];
-        BubbleSort(row);
-        Insert(true, i, row, matrix);
-      }
-      PrintArray(matrix);
+          matrix[i, j] = rand.Next(10);
 
-      Console.WriteLine("Сортировка по столбцам: ");
-      int[] col = new int[rows];
-      for (int i = 0; i < columns; i++) {
-        for (int j = 0; j < rows; j++)
-          col[j] = matrix[j, i];
-        BubbleSort(col);
-        Insert(false, i, col, matrix);
-      }
-      PrintArray(matrix);
+      Console.WriteLine("Original matrix:");
+      Print(matrix, rows, columns);
+
+      Console.WriteLine("Sorted by rows: ");
+      int[,] row_sorted_matr = Sort(matrix, true, rows, columns);
+      Print(row_sorted_matr, rows, columns);
+
+      Console.WriteLine("Sorted by columns: ");
+      int[,] col_sorted_matr = Sort(matrix, false, rows, columns);
+      Print(col_sorted_matr, rows, columns);
+
     }
 
-    static void BubbleSort(int[] inArray) {
-      for (int i = 0; i < inArray.Length; i++)
-        for (int j = 0; j < inArray.Length - i - 1; j++) {
-          if (inArray[j] > inArray[j + 1]) {
-              int temp = inArray[j];
-              inArray[j] = inArray[j + 1];
-              inArray[j + 1] = temp;
-          }
-        }
-    }
-    public static void Insert(bool isRow, int dim, int[] source, int[,] dest) {
-      for (int k = 0; k < source.Length; k++){
-        if (isRow)
-          dest[dim, k] = source[k];
-        else
-          dest[k, dim] = source[k];
-      }
-    }
-
-    public static void PrintArray(int[,] array) {
-      for (int a = 0; a < array.GetLength(0); a++) {
-        for (int b = 0; b < array.GetLength(1); b++)
-          Console.Write(array[a, b] + " ");
+    static void Print(int[,] matr, int row_length, int col_length) {
+      for(int i = 0; i < row_length; i++) {
+        for(int j = 0; j < col_length; j++)
+          Console.Write($"{matr[i, j]} ");
         Console.WriteLine();
       }
+    }
+
+    static int[,] Sort(int[,] matr, bool isRow, int row_length, int col_length) {
+      int[,] new_matr = new int[row_length, col_length]; 
+      if (isRow) { // если isRow, то сортируем по строкам, иначе по столбцам
+        for(int i = 0; i < row_length; i++) {
+          int[] row = new int[col_length];
+          for(int j = 0; j < col_length; j++) {
+            row[j] = matr[i, j]; // Выборка строки матрицы
+          }
+          Array.Sort(row); // Сортировка строки матрицы
+          for(int j = 0; j < col_length; j++)
+            new_matr[i, j] = row[j]; // Запись строки в новую матрицу
+        }
+      }
+      else {
+        for(int j = 0; j < col_length; j++) {
+          int[] col = new int[row_length];
+          for(int i = 0; i < row_length; i++) {
+            col[i] = matr[i, j]; // Выборка столбца матрицы
+          }
+          Array.Sort(col); // Сортировка столбца матрицы
+          for(int i = 0; i < row_length; i++)
+            new_matr[i, j] = col[i]; // Запись строки в новую матрицу
+        }
+      }
+      return new_matr;
     }
   }
 }
