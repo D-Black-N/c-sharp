@@ -1,0 +1,15 @@
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/dz1
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/dz1.deps.json
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/dz1.runtimeconfig.json
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/dz1.dll
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/ref/dz1.dll
+/home/work/bmstu/c-sharp/dz1/bin/Debug/net6.0/dz1.pdb
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.csproj.AssemblyReference.cache
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.GeneratedMSBuildEditorConfig.editorconfig
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.AssemblyInfoInputs.cache
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.AssemblyInfo.cs
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.csproj.CoreCompileInputs.cache
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.dll
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/ref/dz1.dll
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.pdb
+/home/work/bmstu/c-sharp/dz1/obj/Debug/net6.0/dz1.genruntimeconfig.cache
