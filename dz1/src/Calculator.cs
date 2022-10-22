@@ -15,7 +15,7 @@ namespace DZ1 {
       statement = param;
     }
 
-    public string calculate(Stack<Leksema> Stack_n, Stack<Leksema> Stack_o, Leksema item) {
+    public bool calculate(Stack<Leksema> Stack_n, Stack<Leksema> Stack_o, Leksema item) {
       double a, b, c;
 	    a = Stack_n.Pop().value; //Берется верхнее число из стека с числами
 	    switch (Stack_o.Peek().type) {  //Проверяется тип верхней операции из стека с операциями
@@ -50,10 +50,7 @@ namespace DZ1 {
 	      	b = Stack_n.Pop().value;
 	      	if (a == 0) {
             Console.WriteLine("На 0 делить нельзя!");
-            item.type = 'g';
-	      		item.value = -1111;
-            Stack_n.Push(item);
-            break;
+            return false;
 	      	}
 	      	else {
 	      		c = (b / a);
@@ -64,7 +61,7 @@ namespace DZ1 {
 	          break;
 	      	}
       }
-      return "true";
+      return true;
     }
 
     int getRang(char Ch) { //Функция возвращает приоритет операции: "1" для сложения и вычитания, "2" для умножения и деления и т.д.
@@ -130,7 +127,7 @@ namespace DZ1 {
             continue;
           }
           if (Stack_o.Count != 0 && getRang(Ch) <= getRang(Stack_o.Peek().type)) {//Если стек с операциями НЕ пуст, но приоритет текущей операции ниже либо равен верхней в стеке с операциями
-            if (calculate(Stack_n, Stack_o, item) == "false") { //Если функция вернет "false", то прекращаем работу
+            if (calculate(Stack_n, Stack_o, item) == false) { //Если функция вернет "false", то прекращаем работу
               return 0;
             }
             continue;
@@ -146,7 +143,7 @@ namespace DZ1 {
         }
         if (Ch == ')') { //Если прочитана закрывающаяся скобка
           while (Stack_o.Peek().type != '(') {
-            if (calculate(Stack_n, Stack_o, item) == "false") { //Если функция вернет "false", то прекращаем работу
+            if (calculate(Stack_n, Stack_o, item) == false) { //Если функция вернет "false", то прекращаем работу
               return 0;
             } else continue; //Если все хорошо
           }
@@ -161,8 +158,8 @@ namespace DZ1 {
         }
       }
       while (Stack_o.Count != 0) { //Вызываем матем. функцию до тех пор, пока в стеке с операциями не будет 0 элементов
-        if (calculate(Stack_n, Stack_o, item) == "false") { //Если функция вернет "false", то прекращаем работу
-          return 0;
+        if (calculate(Stack_n, Stack_o, item) == false) { //Если функция вернет "false", то прекращаем работу
+          return 0.987654321;
         } else continue; //Если все хорошо
       }
       return Stack_n.Pop().value;

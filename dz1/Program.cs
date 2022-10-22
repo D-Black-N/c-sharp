@@ -7,6 +7,7 @@ class Program {
     string expression = Console.ReadLine();
     Calculator calculator = new Calculator(expression);
     double result = calculator.maths(expression);
-    Console.WriteLine($"Результат: {result}");
+    if (result != 0.987654321)
+      Console.WriteLine($"Результат: {result}");
   }
 }
